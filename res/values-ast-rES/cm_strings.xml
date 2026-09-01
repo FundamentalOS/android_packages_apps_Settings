@@ -21,7 +21,7 @@
     <string name="adb_enable_summary_root">Permite la execución de la depuración d\'Android como root</string>
     <string name="berry_black_theme_title">Prietu puro</string>
     <string name="berry_black_theme_summary">Un fondu en prieto puro pal estilu «Escuridá»</string>
-    <string name="lineagelicense_title">Información llegal de LineageOS</string>
+    <string name="lineagelicense_title">Información llegal de FundamentalOS</string>
     <string name="show_dev_countdown_cm">{count, plural,
       one {}=1      {Tas a # calcu d\'activar la configuración pa desendolcadores.}
       other   {Tas a # calcos d\'activar la configuración pa desendolcadores.}

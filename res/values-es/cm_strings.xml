@@ -23,7 +23,7 @@
     <string name="backup_transport_title">Seleccionar el proveedor de la copia de seguridad</string>
     <string name="berry_black_theme_title">Negro puro</string>
     <string name="berry_black_theme_summary">Fondo negro puro para el tema oscuro</string>
-    <string name="lineagelicense_title">Licencia de LineageOS</string>
+    <string name="lineagelicense_title">Licencia de FundamentalOS</string>
     <string name="show_dev_countdown_cm">{count, plural,
       =1      {Ahora estás a # paso de habilitar las opciones para desarrolladores.}
       other   {Ahora estás a # pasos de habilitar las opciones para desarrolladores.}

@@ -23,7 +23,7 @@
     <string name="backup_transport_title">Vel tilbydar for tryggingskopiering</string>
     <string name="berry_black_theme_title">Heilt svart</string>
     <string name="berry_black_theme_summary">Heilt svart bakgrunn for mørkt tema</string>
-    <string name="lineagelicense_title">Juridisk informasjon for LineageOS</string>
+    <string name="lineagelicense_title">Juridisk informasjon for FundamentalOS</string>
     <string name="show_dev_countdown_cm">{count, plural,
       =1      {Du er no # steg frå å slå på utviklarinnstillingar.}
       other   {Du er no # steg frå å slå på utviklarinnstillingar.}

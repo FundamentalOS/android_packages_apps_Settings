@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="lineagelicense_title">LineageOS lizentzia</string>
+    <string name="lineagelicense_title">FundamentalOS lizentzia</string>
     <string name="show_dev_on_cm">Garatzaileen aukerak gaitu dituzu!</string>
     <string name="show_dev_already_cm">Ez da behar, aurretik gaitu dituzu garatzaileek aukerak.</string>
     <string name="status_bar_double_tap_to_sleep_title">Sakatu lokartzeko</string>

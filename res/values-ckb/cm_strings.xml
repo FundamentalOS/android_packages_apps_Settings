@@ -23,7 +23,7 @@
     <string name="backup_transport_title">دابینکەری Backup هەڵبژێرە</string>
     <string name="berry_black_theme_title">تەواو ڕەش</string>
     <string name="berry_black_theme_summary">پاشبنەمای تەواو ڕەش بۆ ڕوکاری تاریك</string>
-    <string name="lineagelicense_title">یاساکانی LineageOS</string>
+    <string name="lineagelicense_title">یاساکانی FundamentalOS</string>
     <string name="show_dev_countdown_cm">{count, plural,
       =1      {تۆ تەنها # هەنگاو دووریت لە چالاککردنی ڕێکخستنەکانی گەشەپێدەر.}
       other   {تۆ تەنها # هەنگاو دووریت لە چالاککردنی ڕێکخستنەکانی گەشەپێدەر.}

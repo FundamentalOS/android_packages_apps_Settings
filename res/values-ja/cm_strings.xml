@@ -23,7 +23,7 @@
     <string name="backup_transport_title">バックアップ プロバイダの選択</string>
     <string name="berry_black_theme_title">ピュアブラック</string>
     <string name="berry_black_theme_summary">ダークテーマ時に背景をピュアブラックにする</string>
-    <string name="lineagelicense_title">LineageOS 利用規約</string>
+    <string name="lineagelicense_title">FundamentalOS 利用規約</string>
     <string name="show_dev_countdown_cm">{count, plural,
       =1      {開発者向けオプションを有効化するまであと#ステップです}
       other   {開発者向けオプションを有効化するまであと#ステップです}

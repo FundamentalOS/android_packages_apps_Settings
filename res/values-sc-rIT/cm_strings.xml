@@ -23,7 +23,7 @@
     <string name="backup_transport_title">Seletziona su frunidore de còpias de seguresa</string>
     <string name="berry_black_theme_title">Nieddu puru</string>
     <string name="berry_black_theme_summary">Isfundu nieddu puru pro su tema iscuru</string>
-    <string name="lineagelicense_title">Lissèntzia LineageOS</string>
+    <string name="lineagelicense_title">Lissèntzia FundamentalOS</string>
     <string name="show_dev_countdown_cm">{count, plural,
       one {}=1      {T\'ammancat # passu a s\'ativatzione de sa cunfiguratzione de isvilupu.}
       other   {T\'ammancant # passos a s\'ativatzione de sa cunfiguratzione de isvilupu.}

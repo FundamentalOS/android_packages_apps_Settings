@@ -23,7 +23,7 @@
     <string name="backup_transport_title">Izberite ponudnika varnostnih kopij</string>
     <string name="berry_black_theme_title">Popolnoma črna</string>
     <string name="berry_black_theme_summary">Popolnoma črno ozadje za temno temo</string>
-    <string name="lineagelicense_title">Pravna obvestila LineageOS</string>
+    <string name="lineagelicense_title">Pravna obvestila FundamentalOS</string>
     <string name="show_dev_countdown_cm">{count, plural,
       =1      {Zdaj ste # korak pred omogočenjem nastavitev za razvijalce.}
       other   {Zdaj ste # korakov pred omogočenjem nastavitev za razvijalce.}

@@ -23,7 +23,7 @@
     <string name="backup_transport_title">Roghnaigh soláthraí cúltaca</string>
     <string name="berry_black_theme_title">Dubh íon</string>
     <string name="berry_black_theme_summary">Cúlra dubh íon le haghaidh téama dorcha</string>
-    <string name="lineagelicense_title">LineageOS dlíthiúil</string>
+    <string name="lineagelicense_title">FundamentalOS dlíthiúil</string>
     <string name="show_dev_countdown_cm">{count, plural,
 =1 {}
  two {Tá tú # chéim ó shocruithe forbartha a chumasú anois.}

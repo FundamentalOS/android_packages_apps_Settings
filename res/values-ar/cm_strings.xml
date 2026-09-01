@@ -23,7 +23,7 @@
     <string name="backup_transport_title">حدد موفر النسخ الاحتياطي</string>
     <string name="berry_black_theme_title">أسود خالص</string>
     <string name="berry_black_theme_summary">خلفية سوداء خالصة للوضع المظلم</string>
-    <string name="lineagelicense_title">قانون LineageOS</string>
+    <string name="lineagelicense_title">قانون FundamentalOS</string>
     <string name="show_dev_on_cm">مكّنتَ خيارات المطور!</string>
     <string name="show_dev_already_cm">لا داعي، فخيارات المطور مفعّلة.</string>
     <string name="status_bar_double_tap_to_sleep_title">اضغط للنوم</string>

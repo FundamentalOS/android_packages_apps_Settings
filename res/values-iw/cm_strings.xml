@@ -23,7 +23,7 @@
     <string name="backup_transport_title">בחירת ספק גיבוי</string>
     <string name="berry_black_theme_title">שחור נקי</string>
     <string name="berry_black_theme_summary">רקע שחור נקי לערכת נושא כהה</string>
-    <string name="lineagelicense_title">LineageOS משפטי</string>
+    <string name="lineagelicense_title">FundamentalOS משפטי</string>
     <string name="show_dev_countdown_cm">{count, plural,
       =1      {הינך צעד אחד מהפעלת הגדרות למפתחים.}
       other   {הינך # צעדים מהפעלת הגדרות למפתחים.}
