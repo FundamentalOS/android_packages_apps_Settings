@@ -557,7 +557,17 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             @Nullable String iconPackage) {
         if (TextUtils.equals(tile.getGroupKey(), TOP_LEVEL_ACCOUNT_CATEGORY)
                 && iconPackage == null) {
-            // Normalize size for homepage account type raw image
+            if (isThemedIconsEnabled(mContext)) {
+                // FundamentalOS: replace the personal account avatar with the
+                // Monet-tinted Google "G" only while themed icons is on.
+                return getRoundedIcon(new android.graphics.drawable.InsetDrawable(
+                                mContext.getDrawable(R.drawable.ic_homepage_googleg), 0.14f),
+                        com.android.settingslib.widget.theme.R.color
+                                .settingslib_materialColorOnSecondaryContainer,
+                        com.android.settingslib.widget.theme.R.color
+                                .settingslib_materialColorSecondaryContainer);
+            }
+            // Normalize size for homepage account type raw image (stock avatar).
             LayerDrawable drawable = new LayerDrawable(new Drawable[] {iconDrawable});
             int size = mContext.getResources().getDimensionPixelSize(
                     R.dimen.dashboard_tile_image_size);
@@ -565,8 +575,42 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             return drawable;
         }
 
+        if (isThemedIconsEnabled(mContext)) {
+            return getRoundedIcon(iconDrawable,
+                    com.android.settingslib.widget.theme.R.color
+                            .settingslib_materialColorOnSecondaryContainer,
+                    com.android.settingslib.widget.theme.R.color
+                            .settingslib_materialColorSecondaryContainer);
+        }
         ColorScheme scheme = getColorScheme(tile);
         return getRoundedIcon(iconDrawable, scheme.foregroundColor, scheme.backgroundColor);
+    }
+
+    // FundamentalOS: mirror ThemePicker themed-icons state (launcher grid_control).
+    private static boolean isThemedIconsEnabled(android.content.Context context) {
+        try {
+            final android.content.Intent home = new android.content.Intent(
+                    android.content.Intent.ACTION_MAIN)
+                    .addCategory(android.content.Intent.CATEGORY_HOME);
+            final android.content.pm.ResolveInfo info = context.getPackageManager()
+                    .resolveActivity(home,
+                            android.content.pm.PackageManager.MATCH_DEFAULT_ONLY);
+            if (info == null || info.activityInfo == null) {
+                return false;
+            }
+            final android.net.Uri uri = new android.net.Uri.Builder().scheme("content")
+                    .authority(info.activityInfo.packageName + ".grid_control")
+                    .appendPath("icon_themed").build();
+            try (android.database.Cursor cursor = context.getContentResolver()
+                    .query(uri, null, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    final int index = cursor.getColumnIndex("boolean_value");
+                    return index >= 0 && cursor.getInt(index) == 1;
+                }
+            }
+        } catch (Exception e) {
+        }
+        return false;
     }
 
     private Drawable getRoundedIcon(Drawable iconDrawable, int fgColorId, int bgColorId) {

@@ -22,7 +22,15 @@ import static com.android.settingslib.search.SearchIndexable.MOBILE;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
@@ -67,6 +75,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     private static final String TAG = "TopLevelSettings";
     private static final String SAVED_HIGHLIGHT_MIXIN = "highlight_mixin";
     private static final String PREF_KEY_SUPPORT = "top_level_support";
+    private static final String GRID_CONTROL_AUTHORITY_SUFFIX = ".grid_control";
+    private static final String ICON_THEMED_PATH = "icon_themed";
+    private static final String COL_BOOLEAN_VALUE = "boolean_value";
 
     private boolean mIsEmbeddingActivityEnabled;
     private TopLevelHighlightMixin mHighlightMixin;
@@ -196,6 +207,113 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
                     /* scrollNeeded= */ false);
         }
         super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshHomepageIconTint();
+    }
+
+    /* FundamentalOS: when ThemePicker's "themed icons" toggle is on, tint the top-level
+       homepage icons with the Monet secondary-container colors; otherwise keep the stock
+       per-category colored icons. */
+    private void refreshHomepageIconTint() {
+        final Context context = getContext();
+        if (context == null || !SettingsThemeHelper.isExpressiveTheme(context)) {
+            return;
+        }
+        final boolean themed = isThemedIconsEnabled(context);
+        final int bgColor = context.getColor(com.android.settingslib.widget.theme.R.color
+                .settingslib_materialColorSecondaryContainer);
+        final int fgColor = context.getColor(com.android.settingslib.widget.theme.R.color
+                .settingslib_materialColorOnSecondaryContainer);
+        iteratePreferences(preference -> {
+            final int resId = homepageIconRes(preference.getKey());
+            if (resId == 0) {
+                return;
+            }
+            // Re-inflate a fresh copy each time so turning themed icons off restores
+            // the stock per-category color. These icons can not be copied via
+            // getConstantState() -- their glyph layer is a TintDrawable whose
+            // constant state is null -- so we always start from the resource.
+            preference.setIcon(themed
+                    ? buildMonetIcon(context, resId, fgColor, bgColor)
+                    : context.getDrawable(resId));
+        });
+    }
+
+    private static Drawable buildMonetIcon(Context context, int resId, int fgColor,
+            int bgColor) {
+        final Drawable icon = context.getDrawable(resId);
+        if (!(icon instanceof LayerDrawable)) {
+            return icon;
+        }
+        final LayerDrawable layers = (LayerDrawable) icon.mutate();
+        final int count = layers.getNumberOfLayers();
+        if (count < 2) {
+            return layers;
+        }
+        // Layer 0 = background chip, top layer = glyph.
+        layers.getDrawable(0).setTintList(ColorStateList.valueOf(bgColor));
+        layers.getDrawable(count - 1).setTintList(ColorStateList.valueOf(fgColor));
+        return layers;
+    }
+
+    /** Maps a top-level homepage preference key to its ic_homepage_* drawable, or 0. */
+    private static int homepageIconRes(String key) {
+        if (key == null) {
+            return 0;
+        }
+        switch (key) {
+            case "top_level_network": return R.drawable.ic_homepage_network;
+            case "top_level_connected_devices": return R.drawable.ic_homepage_connected_device;
+            case "top_level_apps": return R.drawable.ic_homepage_apps;
+            case "top_level_notifications": return R.drawable.ic_homepage_notification;
+            case "top_level_sound": return R.drawable.ic_homepage_sound;
+            case "top_level_priority_modes": return R.drawable.ic_homepage_modes;
+            case "top_level_communal": return R.drawable.ic_homepage_hub_mode;
+            case "top_level_display": return R.drawable.ic_homepage_display;
+            case "top_level_wallpaper": return R.drawable.ic_homepage_wallpaper;
+            case "top_level_storage": return R.drawable.ic_homepage_storage;
+            case "top_level_battery": return R.drawable.ic_homepage_battery;
+            case "top_level_system": return R.drawable.ic_homepage_system_dashboard;
+            case "top_level_about_device": return R.drawable.ic_homepage_about;
+            case "top_level_safety_center": return R.drawable.ic_homepage_safety_center;
+            case "top_level_security": return R.drawable.ic_homepage_security;
+            case "top_level_privacy": return R.drawable.ic_homepage_privacy;
+            case "top_level_location": return R.drawable.ic_homepage_location;
+            case "top_level_accounts": return R.drawable.ic_homepage_accounts;
+            case "top_level_supervision": return R.drawable.ic_homepage_supervision;
+            case "top_level_emergency": return R.drawable.ic_homepage_emergency;
+            case "top_level_accessibility": return R.drawable.ic_homepage_accessibility;
+            case "top_level_support": return R.drawable.ic_homepage_support;
+            default: return 0;
+        }
+    }
+
+    private static boolean isThemedIconsEnabled(Context context) {
+        try {
+            final Intent home = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME);
+            final ResolveInfo info = context.getPackageManager()
+                    .resolveActivity(home, PackageManager.MATCH_DEFAULT_ONLY);
+            if (info == null || info.activityInfo == null) {
+                return false;
+            }
+            final Uri uri = new Uri.Builder().scheme("content")
+                    .authority(info.activityInfo.packageName + GRID_CONTROL_AUTHORITY_SUFFIX)
+                    .appendPath(ICON_THEMED_PATH).build();
+            try (Cursor cursor =
+                    context.getContentResolver().query(uri, null, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    final int index = cursor.getColumnIndex(COL_BOOLEAN_VALUE);
+                    return index >= 0 && cursor.getInt(index) == 1;
+                }
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Unable to read themed-icons state from launcher", e);
+        }
+        return false;
     }
 
     private boolean isOnlyOneActivityInTask() {
