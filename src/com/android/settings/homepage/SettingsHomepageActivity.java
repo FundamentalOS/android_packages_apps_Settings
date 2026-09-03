@@ -392,13 +392,12 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                     // Apply the insets paddings to the view.
                     v.setPadding(insets.left, 0, insets.right, insets.bottom);
 
-                    // reset the top padding of search bar container to original top padding
-                    // plus insets top.
-                    View container = findViewById(R.id.app_bar_container);
-                    final int top_padding = getResources().getDimensionPixelSize(
-                            R.dimen.search_bar_container_top_padding);
-                    container.setPadding(container.getPaddingLeft(), top_padding + insets.top,
-                            container.getPaddingRight(), container.getPaddingBottom());
+                    // Push the collapsing app bar below the status bar.
+                    View appBar = findViewById(R.id.app_bar);
+                    if (appBar != null) {
+                        appBar.setPadding(appBar.getPaddingLeft(), insets.top,
+                                appBar.getPaddingRight(), appBar.getPaddingBottom());
+                    }
 
                     // Return CONSUMED if you don't want the window insets to keep being
                     // passed down to descendant views.
@@ -407,10 +406,25 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     }
 
     private void initSearchBarView() {
-        View toolbar = findViewById(R.id.search_action_bar);
-        FeatureFactory.getFeatureFactory().getSearchFeatureProvider()
-                .initSearchToolbar(this /* activity */, toolbar,
-                        SettingsEnums.SETTINGS_HOMEPAGE);
+        final com.google.android.material.appbar.CollapsingToolbarLayout collapsingToolbar =
+                findViewById(R.id.collapsing_toolbar);
+        if (collapsingToolbar != null) {
+            collapsingToolbar.setTitle(getText(R.string.settings_label));
+        }
+        // Use the expressive toolbar's primary action button as the search affordance so it
+        // matches the sub-page toolbars (icon coloring/position/style).
+        final View searchButton = findViewById(R.id.homepage_search);
+        if (searchButton == null) {
+            return;
+        }
+        searchButton.setOnClickListener(v -> {
+            final Intent intent = FeatureFactory.getFeatureFactory().getSearchFeatureProvider()
+                    .buildSearchIntent(getApplicationContext(), SettingsEnums.SETTINGS_HOMEPAGE)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        });
     }
 
     private void updateHomepageUI() {
@@ -436,8 +450,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         // Update content background.
         findViewById(android.R.id.content).setBackgroundColor(color);
-        //Update search bar background
-        findViewById(R.id.app_bar_container).setBackgroundColor(color);
+        // Update the collapsing app bar background.
+        findViewById(R.id.app_bar).setBackgroundColor(color);
     }
 
     private void showSuggestionFragment(boolean scrollNeeded) {
