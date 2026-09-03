@@ -30,6 +30,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
@@ -224,10 +225,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             return;
         }
         final boolean themed = isThemedIconsEnabled(context);
-        final int bgColor = context.getColor(com.android.settingslib.widget.theme.R.color
-                .settingslib_materialColorSecondaryContainer);
-        final int fgColor = context.getColor(com.android.settingslib.widget.theme.R.color
-                .settingslib_materialColorOnSecondaryContainer);
         iteratePreferences(preference -> {
             final int resId = homepageIconRes(preference.getKey());
             if (resId == 0) {
@@ -238,13 +235,12 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             // getConstantState() -- their glyph layer is a TintDrawable whose
             // constant state is null -- so we always start from the resource.
             preference.setIcon(themed
-                    ? buildMonetIcon(context, resId, fgColor, bgColor)
+                    ? buildMonetIcon(context, resId)
                     : context.getDrawable(resId));
         });
     }
 
-    private static Drawable buildMonetIcon(Context context, int resId, int fgColor,
-            int bgColor) {
+    private static Drawable buildMonetIcon(Context context, int resId) {
         final Drawable icon = context.getDrawable(resId);
         if (!(icon instanceof LayerDrawable)) {
             return icon;
@@ -254,11 +250,24 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         if (count < 2) {
             return layers;
         }
-        // Layer 0 = background chip, top layer = glyph.
-        layers.getDrawable(0).setTintList(ColorStateList.valueOf(bgColor));
-        layers.getDrawable(count - 1).setTintList(ColorStateList.valueOf(fgColor));
+        // The stock per-category hue is baked into the background chip
+        // (an AdaptiveIconShapeDrawable == ShapeDrawable, android:color=...).
+        final Drawable chip = layers.getDrawable(0);
+        int designColor = 0;
+        if (chip instanceof ShapeDrawable) {
+            designColor = ((ShapeDrawable) chip).getPaint().getColor();
+        }
+        if (android.graphics.Color.alpha(designColor) == 0) {
+            designColor = context.getColor(com.android.settingslib.widget.theme.R.color
+                    .settingslib_materialColorSecondaryContainer);
+        }
+        final int[] pair = HomepageIconColors.harmonizedContainer(context, designColor);
+        // Layer 0 = background chip (container), top layer = glyph (on-container).
+        layers.getDrawable(0).setTintList(ColorStateList.valueOf(pair[0]));
+        layers.getDrawable(count - 1).setTintList(ColorStateList.valueOf(pair[1]));
         return layers;
     }
+
 
     /** Maps a top-level homepage preference key to its ic_homepage_* drawable, or 0. */
     private static int homepageIconRes(String key) {

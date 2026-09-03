@@ -553,6 +553,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }, new Handler(Looper.getMainLooper()));
     }
 
+    private static final int GOOGLE_SEED_COLOR = 0xFF4285F4; // Google blue
+
     private Drawable getExpressiveHomepageIcon(Tile tile, Drawable iconDrawable,
             @Nullable String iconPackage) {
         if (TextUtils.equals(tile.getGroupKey(), TOP_LEVEL_ACCOUNT_CATEGORY)
@@ -560,12 +562,11 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             if (isThemedIconsEnabled(mContext)) {
                 // FundamentalOS: replace the personal account avatar with the
                 // Monet-tinted Google "G" only while themed icons is on.
-                return getRoundedIcon(new android.graphics.drawable.InsetDrawable(
+                final int[] gPair = com.android.settings.homepage.HomepageIconColors
+                        .harmonizedContainer(mContext, GOOGLE_SEED_COLOR);
+                return getRoundedIconArgb(new android.graphics.drawable.InsetDrawable(
                                 mContext.getDrawable(R.drawable.ic_homepage_googleg), 0.14f),
-                        com.android.settingslib.widget.theme.R.color
-                                .settingslib_materialColorOnSecondaryContainer,
-                        com.android.settingslib.widget.theme.R.color
-                                .settingslib_materialColorSecondaryContainer);
+                        gPair[1], gPair[0]);
             }
             // Normalize size for homepage account type raw image (stock avatar).
             LayerDrawable drawable = new LayerDrawable(new Drawable[] {iconDrawable});
@@ -576,11 +577,10 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
 
         if (isThemedIconsEnabled(mContext)) {
-            return getRoundedIcon(iconDrawable,
-                    com.android.settingslib.widget.theme.R.color
-                            .settingslib_materialColorOnSecondaryContainer,
-                    com.android.settingslib.widget.theme.R.color
-                            .settingslib_materialColorSecondaryContainer);
+            final int seed = mContext.getColor(getColorScheme(tile).backgroundColor);
+            final int[] pair = com.android.settings.homepage.HomepageIconColors
+                    .harmonizedContainer(mContext, seed);
+            return getRoundedIconArgb(iconDrawable, pair[1], pair[0]);
         }
         ColorScheme scheme = getColorScheme(tile);
         return getRoundedIcon(iconDrawable, scheme.foregroundColor, scheme.backgroundColor);
@@ -617,6 +617,15 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         iconDrawable.setTint(mContext.getColor(fgColorId));
         AdaptiveIcon roundedIcon = new AdaptiveIcon(mContext, iconDrawable);
         roundedIcon.setBackgroundColor(mContext.getColor(bgColorId));
+        return roundedIcon;
+    }
+
+    // FundamentalOS: like getRoundedIcon but taking already-resolved ARGB colours
+    // (the harmonised container / on-container pair), not colour resource ids.
+    private Drawable getRoundedIconArgb(Drawable iconDrawable, int fgColor, int bgColor) {
+        iconDrawable.setTint(fgColor);
+        AdaptiveIcon roundedIcon = new AdaptiveIcon(mContext, iconDrawable);
+        roundedIcon.setBackgroundColor(bgColor);
         return roundedIcon;
     }
 
