@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fundamental_integrity_title">Servicio de validación Forge</string>
+    <string name="fundamental_integrity_entry_summary">Opciones de desarrollo y compatibilidad</string>
+    <string name="fundamental_integrity_main_switch_title">Activar validación</string>
+    <string name="fundamental_integrity_scope_category">Alcance</string>
+    <string name="fundamental_integrity_target_apps_title">Aplicaciones objetivo</string>
+    <string name="fundamental_integrity_target_apps_intro">Elige a qué aplicaciones se aplican estos ajustes.</string>
+    <string name="fundamental_integrity_target_apps_none">Ninguna seleccionada</string>
+    <string name="fundamental_integrity_target_apps_count">%1$d seleccionadas</string>
+    <string name="fundamental_integrity_general_category">General</string>
+    <string name="fundamental_integrity_override_fetching_title">Anular servicio de obtención</string>
+    <string name="fundamental_integrity_override_fetching_summary">Desactiva el servicio integrado de actualización de keybox y usa un keybox importado.</string>
+    <string name="fundamental_integrity_import_keybox_title">Importar keybox</string>
+    <string name="fundamental_integrity_keybox_present">Instalado</string>
+    <string name="fundamental_integrity_keybox_absent">No instalado</string>
+    <string name="fundamental_integrity_keybox_imported">Instalado: %1$s</string>
+    <string name="fundamental_integrity_keybox_invalid">Archivo no válido: %1$s</string>
+    <string name="fundamental_integrity_keybox_import_failed">No se pudo importar el archivo</string>
+    <string name="fundamental_integrity_fp_category">Huella de compilación</string>
+    <string name="fundamental_integrity_fp_switch_title">Anular huella de compilación</string>
+    <string name="fundamental_integrity_fp_switch_summary">Usar el valor de abajo</string>
+    <string name="fundamental_integrity_fp_value_title">Valor</string>
+    <string name="fundamental_integrity_value_unset">Sin establecer</string>
+</resources>

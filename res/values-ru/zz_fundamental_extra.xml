@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fundamental_integrity_title">Служба проверки Forge</string>
+    <string name="fundamental_integrity_entry_summary">Параметры для разработчиков и совместимости</string>
+    <string name="fundamental_integrity_main_switch_title">Включить проверку</string>
+    <string name="fundamental_integrity_scope_category">Область</string>
+    <string name="fundamental_integrity_target_apps_title">Целевые приложения</string>
+    <string name="fundamental_integrity_target_apps_intro">Выберите, к каким приложениям применяются эти настройки.</string>
+    <string name="fundamental_integrity_target_apps_none">Ничего не выбрано</string>
+    <string name="fundamental_integrity_target_apps_count">Выбрано: %1$d</string>
+    <string name="fundamental_integrity_general_category">Общие</string>
+    <string name="fundamental_integrity_override_fetching_title">Переопределить службу получения</string>
+    <string name="fundamental_integrity_override_fetching_summary">Отключить встроенную службу обновления keybox и использовать импортированный keybox.</string>
+    <string name="fundamental_integrity_import_keybox_title">Импортировать keybox</string>
+    <string name="fundamental_integrity_keybox_present">Установлено</string>
+    <string name="fundamental_integrity_keybox_absent">Не установлено</string>
+    <string name="fundamental_integrity_keybox_imported">Установлено: %1$s</string>
+    <string name="fundamental_integrity_keybox_invalid">Недопустимый файл: %1$s</string>
+    <string name="fundamental_integrity_keybox_import_failed">Не удалось импортировать файл</string>
+    <string name="fundamental_integrity_fp_category">Отпечаток сборки</string>
+    <string name="fundamental_integrity_fp_switch_title">Переопределить отпечаток сборки</string>
+    <string name="fundamental_integrity_fp_switch_summary">Использовать значение ниже</string>
+    <string name="fundamental_integrity_fp_value_title">Значение</string>
+    <string name="fundamental_integrity_value_unset">Не задано</string>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fundamental_integrity_title">Service de validation Forge</string>
+    <string name="fundamental_integrity_entry_summary">Options de développement et de compatibilité</string>
+    <string name="fundamental_integrity_main_switch_title">Activer la validation</string>
+    <string name="fundamental_integrity_scope_category">Portée</string>
+    <string name="fundamental_integrity_target_apps_title">Applications ciblées</string>
+    <string name="fundamental_integrity_target_apps_intro">Choisissez les applications auxquelles ces paramètres s\'appliquent.</string>
+    <string name="fundamental_integrity_target_apps_none">Aucune sélectionnée</string>
+    <string name="fundamental_integrity_target_apps_count">%1$d sélectionnée(s)</string>
+    <string name="fundamental_integrity_general_category">Général</string>
+    <string name="fundamental_integrity_override_fetching_title">Remplacer le service de récupération</string>
+    <string name="fundamental_integrity_override_fetching_summary">Désactive le service intégré de mise à jour du keybox et utilise un keybox importé.</string>
+    <string name="fundamental_integrity_import_keybox_title">Importer un keybox</string>
+    <string name="fundamental_integrity_keybox_present">Installé</string>
+    <string name="fundamental_integrity_keybox_absent">Non installé</string>
+    <string name="fundamental_integrity_keybox_imported">Installé : %1$s</string>
+    <string name="fundamental_integrity_keybox_invalid">Fichier non valide : %1$s</string>
+    <string name="fundamental_integrity_keybox_import_failed">Impossible d\'importer le fichier</string>
+    <string name="fundamental_integrity_fp_category">Empreinte de build</string>
+    <string name="fundamental_integrity_fp_switch_title">Remplacer l\'empreinte de build</string>
+    <string name="fundamental_integrity_fp_switch_summary">Utiliser la valeur ci-dessous</string>
+    <string name="fundamental_integrity_fp_value_title">Valeur</string>
+    <string name="fundamental_integrity_value_unset">Non défini</string>
+</resources>

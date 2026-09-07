@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fundamental_integrity_title">Forge 验证服务</string>
+    <string name="fundamental_integrity_entry_summary">开发者与兼容性选项</string>
+    <string name="fundamental_integrity_main_switch_title">开启验证</string>
+    <string name="fundamental_integrity_scope_category">范围</string>
+    <string name="fundamental_integrity_target_apps_title">目标应用</string>
+    <string name="fundamental_integrity_target_apps_intro">选择这些设置应用于哪些应用。</string>
+    <string name="fundamental_integrity_target_apps_none">未选择</string>
+    <string name="fundamental_integrity_target_apps_count">已选择 %1$d 个</string>
+    <string name="fundamental_integrity_general_category">常规</string>
+    <string name="fundamental_integrity_override_fetching_title">覆盖获取服务</string>
+    <string name="fundamental_integrity_override_fetching_summary">关闭内置的 keybox 更新服务,改用导入的 keybox。</string>
+    <string name="fundamental_integrity_import_keybox_title">导入 keybox</string>
+    <string name="fundamental_integrity_keybox_present">已安装</string>
+    <string name="fundamental_integrity_keybox_absent">未安装</string>
+    <string name="fundamental_integrity_keybox_imported">已安装:%1$s</string>
+    <string name="fundamental_integrity_keybox_invalid">文件无效:%1$s</string>
+    <string name="fundamental_integrity_keybox_import_failed">无法导入文件</string>
+    <string name="fundamental_integrity_fp_category">构建指纹</string>
+    <string name="fundamental_integrity_fp_switch_title">覆盖构建指纹</string>
+    <string name="fundamental_integrity_fp_switch_summary">使用下面的值</string>
+    <string name="fundamental_integrity_fp_value_title">值</string>
+    <string name="fundamental_integrity_value_unset">未设置</string>
+</resources>

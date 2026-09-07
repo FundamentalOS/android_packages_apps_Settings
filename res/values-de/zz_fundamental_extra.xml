@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fundamental_integrity_title">Forge-Validierungsdienst</string>
+    <string name="fundamental_integrity_entry_summary">Entwickler- und Kompatibilitätsoptionen</string>
+    <string name="fundamental_integrity_main_switch_title">Validierung aktivieren</string>
+    <string name="fundamental_integrity_scope_category">Geltungsbereich</string>
+    <string name="fundamental_integrity_target_apps_title">Ziel-Apps</string>
+    <string name="fundamental_integrity_target_apps_intro">Wähle aus, für welche Apps diese Einstellungen gelten.</string>
+    <string name="fundamental_integrity_target_apps_none">Keine ausgewählt</string>
+    <string name="fundamental_integrity_target_apps_count">%1$d ausgewählt</string>
+    <string name="fundamental_integrity_general_category">Allgemein</string>
+    <string name="fundamental_integrity_override_fetching_title">Abrufdienst überschreiben</string>
+    <string name="fundamental_integrity_override_fetching_summary">Den integrierten Keybox-Aktualisierungsdienst deaktivieren und stattdessen einen importierten Keybox verwenden.</string>
+    <string name="fundamental_integrity_import_keybox_title">Keybox importieren</string>
+    <string name="fundamental_integrity_keybox_present">Installiert</string>
+    <string name="fundamental_integrity_keybox_absent">Nicht installiert</string>
+    <string name="fundamental_integrity_keybox_imported">Installiert: %1$s</string>
+    <string name="fundamental_integrity_keybox_invalid">Ungültige Datei: %1$s</string>
+    <string name="fundamental_integrity_keybox_import_failed">Datei konnte nicht importiert werden</string>
+    <string name="fundamental_integrity_fp_category">Build-Fingerabdruck</string>
+    <string name="fundamental_integrity_fp_switch_title">Build-Fingerabdruck überschreiben</string>
+    <string name="fundamental_integrity_fp_switch_summary">Den Wert unten verwenden</string>
+    <string name="fundamental_integrity_fp_value_title">Wert</string>
+    <string name="fundamental_integrity_value_unset">Nicht festgelegt</string>
+</resources>

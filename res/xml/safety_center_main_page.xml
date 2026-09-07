@@ -49,5 +49,10 @@
             android:summary="@string/more_security_privacy_summary"
             android:title="@string/more_security_privacy_settings"
             settings:controller="com.android.settings.safetycenter.ui.MoreSecurityPrivacyPreferenceController"/>
+        <Preference
+            android:key="fundamental_integrity_entry"
+            android:title="@string/fundamental_integrity_title"
+            android:summary="@string/fundamental_integrity_entry_summary"
+            android:fragment="com.android.settings.fundamental.IntegritySpoofSettings"/>
     </PreferenceCategory>
 </PreferenceScreen>
