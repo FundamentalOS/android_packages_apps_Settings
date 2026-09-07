@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- BEGIN FundamentalOS integrity settings strings -->
+    <!-- Title of the settings screen [CHAR LIMIT=40] -->
+    <string name="fundamental_integrity_title">Forge Validation Service</string>
+    <!-- Summary of the entry on the security page [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_entry_summary">Developer and compatibility options</string>
+    <!-- Master switch title [CHAR LIMIT=60] -->
+    <string name="fundamental_integrity_main_switch_title">Enable validation</string>
+    <!-- Category header [CHAR LIMIT=40] -->
+    <string name="fundamental_integrity_scope_category">Scope</string>
+    <!-- Target apps entry title [CHAR LIMIT=60] -->
+    <string name="fundamental_integrity_target_apps_title">Target apps</string>
+    <!-- Target apps sub-screen intro [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_target_apps_intro">Choose which apps these settings apply to.</string>
+    <!-- Summary when none are selected [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_target_apps_none">None selected</string>
+    <!-- Summary with a count, %1$d is the number [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_target_apps_count">%1$d selected</string>
+    <!-- Category header [CHAR LIMIT=40] -->
+    <string name="fundamental_integrity_general_category">General</string>
+    <!-- Override fetching service switch title [CHAR LIMIT=60] -->
+    <string name="fundamental_integrity_override_fetching_title">Override fetching service</string>
+    <!-- Override fetching service switch summary [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_override_fetching_summary">Turn off the built-in keybox update service and use an imported keybox instead.</string>
+    <!-- Import entry title [CHAR LIMIT=60] -->
+    <string name="fundamental_integrity_import_keybox_title">Import keybox</string>
+    <!-- Import entry summary, %1$s is a short status [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_keybox_installed">%1$s</string>
+    <!-- Import entry summary when a file is present [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_keybox_present">Installed</string>
+    <!-- Import entry summary when none present [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_keybox_absent">Not installed</string>
+    <!-- Toast after a file is imported, %1$s is a short status [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_keybox_imported">Installed: %1$s</string>
+    <!-- Toast when the file does not validate, %1$s explains why [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_keybox_invalid">Invalid file: %1$s</string>
+    <!-- Toast when the file cannot be read or saved [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_keybox_import_failed">Could not import the file</string>
+    <!-- Category header [CHAR LIMIT=40] -->
+    <string name="fundamental_integrity_fp_category">Build fingerprint</string>
+    <!-- Switch title [CHAR LIMIT=60] -->
+    <string name="fundamental_integrity_fp_switch_title">Override build fingerprint</string>
+    <!-- Switch summary [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_fp_switch_summary">Use the value below</string>
+    <!-- Value entry title [CHAR LIMIT=60] -->
+    <string name="fundamental_integrity_fp_value_title">Value</string>
+    <!-- Summary shown when a text value has not been set [CHAR LIMIT=NONE] -->
+    <string name="fundamental_integrity_value_unset">Not set</string>
+    <!-- END FundamentalOS integrity settings strings -->
+</resources>

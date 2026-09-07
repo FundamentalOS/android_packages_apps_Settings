@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fundamental_integrity_title">Forge 検証サービス</string>
+    <string name="fundamental_integrity_entry_summary">開発者向けと互換性のオプション</string>
+    <string name="fundamental_integrity_main_switch_title">検証を有効にする</string>
+    <string name="fundamental_integrity_scope_category">適用範囲</string>
+    <string name="fundamental_integrity_target_apps_title">対象アプリ</string>
+    <string name="fundamental_integrity_target_apps_intro">これらの設定を適用するアプリを選択します。</string>
+    <string name="fundamental_integrity_target_apps_none">未選択</string>
+    <string name="fundamental_integrity_target_apps_count">%1$d 個選択中</string>
+    <string name="fundamental_integrity_general_category">一般</string>
+    <string name="fundamental_integrity_override_fetching_title">取得サービスをオーバーライド</string>
+    <string name="fundamental_integrity_override_fetching_summary">内蔵の keybox 更新サービスをオフにし、インポートした keybox を使用します。</string>
+    <string name="fundamental_integrity_import_keybox_title">keybox をインポート</string>
+    <string name="fundamental_integrity_keybox_present">インストール済み</string>
+    <string name="fundamental_integrity_keybox_absent">未インストール</string>
+    <string name="fundamental_integrity_keybox_imported">インストール済み: %1$s</string>
+    <string name="fundamental_integrity_keybox_invalid">無効なファイル: %1$s</string>
+    <string name="fundamental_integrity_keybox_import_failed">ファイルをインポートできませんでした</string>
+    <string name="fundamental_integrity_fp_category">ビルドフィンガープリント</string>
+    <string name="fundamental_integrity_fp_switch_title">ビルドフィンガープリントをオーバーライド</string>
+    <string name="fundamental_integrity_fp_switch_summary">下の値を使用</string>
+    <string name="fundamental_integrity_fp_value_title">値</string>
+    <string name="fundamental_integrity_value_unset">未設定</string>
+</resources>
