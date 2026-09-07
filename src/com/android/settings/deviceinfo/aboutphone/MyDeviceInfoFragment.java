@@ -59,6 +59,10 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.LayoutPreference;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.AppBarLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -78,6 +82,8 @@ public class MyDeviceInfoFragment extends DashboardFragment
     private BuildNumberPreferenceController mBuildNumberPreferenceController;
 
     private DeviceInfoViewModel mDeviceInfoViewModel;
+
+    private boolean mDidScrollToHeader;
 
     @Override
     public int getMetricsCategory() {
@@ -124,6 +130,25 @@ public class MyDeviceInfoFragment extends DashboardFragment
     public void onStart() {
         super.onStart();
         initHeader();
+        // FundamentalOS: the owner-avatar header becomes visible (inserted at index 0) only inside
+        // initHeader(), which runs after the list has already placed the first category at the top,
+        // so RecyclerView leaves the newly inserted header just above the viewport. On the first
+        // open, scroll back up to it and keep the toolbar expanded so the avatar shows without a
+        // manual swipe. Guarded so returning from a sub-screen preserves the user's scroll position.
+        if (!mDidScrollToHeader) {
+            mDidScrollToHeader = true;
+            final RecyclerView list = getListView();
+            if (list != null) {
+                list.post(() -> {
+                    list.scrollToPosition(0);
+                    final View appBar = getActivity() != null
+                            ? getActivity().findViewById(R.id.app_bar) : null;
+                    if (appBar instanceof AppBarLayout) {
+                        ((AppBarLayout) appBar).setExpanded(true, false);
+                    }
+                });
+            }
+        }
     }
 
     @Override

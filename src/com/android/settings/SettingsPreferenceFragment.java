@@ -239,6 +239,21 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
+        expandCollapsingToolbar();
+    }
+
+    /**
+     * FundamentalOS: sub-screens open with the toolbar collapsed by default (AOSP A16). Always
+     * expand it to the large-title state on open. Expanding also resets the app-bar offset to zero,
+     * so screens that lead with an entity header (e.g. About phone's owner avatar) show that header
+     * at the true top instead of having it pushed up behind the collapsed toolbar.
+     */
+    private void expandCollapsingToolbar() {
+        final Activity activity = getActivity();
+        final View appBar = activity != null ? activity.findViewById(R.id.app_bar) : null;
+        if (appBar instanceof AppBarLayout) {
+            ((AppBarLayout) appBar).setExpanded(true, false);
+        }
     }
 
     @Override
