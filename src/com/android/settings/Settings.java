@@ -89,6 +89,7 @@ public class Settings extends SettingsActivity {
     */
 
     public static class MemtagPageActivity extends SettingsActivity { /* empty */}
+    public static class FundamentalIntegrityActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothDashboardActivity extends SettingsActivity { /* empty */ }
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }

@@ -2415,6 +2415,18 @@
                        android:value="@string/menu_key_safety_center"/>
         </activity>
 
+        <activity
+            android:name="Settings$FundamentalIntegrityActivity"
+            android:label="@string/fundamental_integrity_title"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.FORGE_VALIDATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.fundamental.IntegritySpoofSettings" />
+        </activity>
+
         <activity android:name="MonitoringCertInfoActivity"
                 android:label=""
                 android:theme="@style/Transparent"
