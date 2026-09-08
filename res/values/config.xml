@@ -951,4 +951,7 @@
          number of values, each pair being width x height. If empty, all resolutions are supported. -->
     <integer-array name="config_resolutionsShownOnExternalDisplay" translatable="false"/>
 
+    <!-- FundamentalOS: Play Integrity forge is enabled out of the box. Overlay to false to ship
+         it off by default. -->
+    <bool name="config_fundamentalIntegrityDefaultEnabled">true</bool>
 </resources>

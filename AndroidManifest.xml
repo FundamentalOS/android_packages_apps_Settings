@@ -236,6 +236,13 @@
             <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
         </activity-alias>
 
+        <receiver android:name=".fundamental.IntegritySpoofBootReceiver"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
         <receiver android:name=".SettingsInitialize"
             android:exported="true">
             <intent-filter>

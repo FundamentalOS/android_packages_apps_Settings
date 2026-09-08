@@ -16,6 +16,11 @@
 
 package com.android.settings.fundamental;
 
+import android.content.Context;
+import android.provider.Settings;
+
+import com.android.settings.R;
+
 /**
  * Canonical names for the FundamentalOS Play Integrity attestation-forge configuration.
  *
@@ -93,4 +98,30 @@ public final class IntegritySpoofKeys {
     public static final String PKG_GMS = "com.google.android.gms";
     /** Google Play Store, holder of {@code integrity.api.key.alias}. */
     public static final String PKG_VENDING = "com.android.vending";
+
+    // ---- Defaults (FundamentalOS: forge is on out of the box, targeting the Play Integrity apps) ----
+
+    /** Packages the forge targets when the user has never chosen any. */
+    public static final String[] DEFAULT_TARGET_PACKAGES = { PKG_GMS, PKG_VENDING };
+
+    /** Master-switch default, overlayable via config_fundamentalIntegrityDefaultEnabled. */
+    public static boolean defaultEnabled(Context ctx) {
+        return ctx.getResources().getBoolean(R.bool.config_fundamentalIntegrityDefaultEnabled);
+    }
+
+    /**
+     * Effective target-package list: the user's stored selection, the {@link #DEFAULT_TARGET_PACKAGES}
+     * when it was never set (null), or none when the user explicitly cleared it (empty string).
+     */
+    public static String[] effectiveTargetPackages(Context ctx) {
+        final String csv = Settings.Secure.getString(ctx.getContentResolver(),
+                SECURE_TARGET_PACKAGES);
+        if (csv == null) {
+            return DEFAULT_TARGET_PACKAGES;
+        }
+        if (csv.isEmpty()) {
+            return new String[0];
+        }
+        return csv.split(",");
+    }
 }

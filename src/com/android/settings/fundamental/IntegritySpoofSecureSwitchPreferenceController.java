@@ -57,7 +57,12 @@ public class IntegritySpoofSecureSwitchPreferenceController extends TogglePrefer
     }
 
     private void wireListener(Preference preference) {
-        if (preference != null) {
+        // TogglePreferenceController already special-cases the main switch (MainSwitchPreference) and
+        // wires its own change path; adding a second OnPreferenceChangeListener here makes a single
+        // tap fire twice (visible as a double click sound). Only the plain SwitchPreferenceCompat
+        // sub-switches, which the base controller does NOT auto-wire, need manual wiring.
+        if (preference != null
+                && !(preference instanceof com.android.settingslib.widget.MainSwitchPreference)) {
             preference.setOnPreferenceChangeListener(this);
         }
     }
@@ -69,7 +74,10 @@ public class IntegritySpoofSecureSwitchPreferenceController extends TogglePrefer
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(), getPreferenceKey(), 0) == 1;
+        // The master switch is enabled out of the box (overlayable); sub-switches default off.
+        final int def = IntegritySpoofKeys.SECURE_ENABLED.equals(getPreferenceKey())
+                && IntegritySpoofKeys.defaultEnabled(mContext) ? 1 : 0;
+        return Settings.Secure.getInt(mContext.getContentResolver(), getPreferenceKey(), def) == 1;
     }
 
     @Override

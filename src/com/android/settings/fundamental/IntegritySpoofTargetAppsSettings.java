@@ -23,7 +23,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -67,8 +66,9 @@ public class IntegritySpoofTargetAppsSettings extends DashboardFragment {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
         mSelected.clear();
-        mSelected.addAll(parseCsv(Settings.Secure.getString(
-                getContext().getContentResolver(), IntegritySpoofKeys.SECURE_TARGET_PACKAGES)));
+        // Default to the Play Integrity apps when the user has never chosen a target set.
+        mSelected.addAll(java.util.Arrays.asList(
+                IntegritySpoofKeys.effectiveTargetPackages(getContext())));
         populateApps();
     }
 
@@ -132,13 +132,8 @@ public class IntegritySpoofTargetAppsSettings extends DashboardFragment {
         final String csv = TextUtils.join(",", mSelected);
         Settings.Secure.putString(getContext().getContentResolver(),
                 IntegritySpoofKeys.SECURE_TARGET_PACKAGES, csv);
-        try {
-            DeviceConfig.setProperty(IntegritySpoofKeys.DEVICE_CONFIG_NAMESPACE_APP_COMPAT,
-                    IntegritySpoofKeys.DEVICE_CONFIG_SYSPROP_OVERRIDE_PKGS, csv, false);
-        } catch (Exception e) {
-            Log.w(TAG, "Unable to update DeviceConfig package list", e);
-        }
-        // Mirror the selection into the keystore2 forge's target-uid file.
+        // syncTargets writes BOTH the keystore2 target-uid file and the appcompat override pkg list,
+        // each gated by the master switch.
         IntegritySpoofBridge.syncTargets(getContext());
     }
 
