@@ -18,8 +18,8 @@ package com.android.settings.fundamental;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.File;
@@ -55,32 +55,45 @@ public final class IntegritySpoofBridge {
         if (context == null) {
             return;
         }
-        final Set<Integer> uids = new LinkedHashSet<>();
         final boolean enabled = Settings.Secure.getInt(context.getContentResolver(),
-                IntegritySpoofKeys.SECURE_ENABLED, 0) == 1;
+                IntegritySpoofKeys.SECURE_ENABLED,
+                IntegritySpoofKeys.defaultEnabled(context) ? 1 : 0) == 1;
+        final Set<Integer> uids = new LinkedHashSet<>();
+        final StringBuilder pkgCsv = new StringBuilder();
         if (enabled) {
-            final String csv = Settings.Secure.getString(context.getContentResolver(),
-                    IntegritySpoofKeys.SECURE_TARGET_PACKAGES);
-            if (!TextUtils.isEmpty(csv)) {
-                final PackageManager pm = context.getPackageManager();
-                for (String pkg : csv.split(",")) {
-                    final String p = pkg.trim();
-                    if (p.isEmpty()) {
-                        continue;
-                    }
-                    try {
-                        uids.add(pm.getPackageUid(p, 0));
-                    } catch (Exception e) {
-                        Log.w(TAG, "cannot resolve uid for " + p, e);
-                    }
+            final PackageManager pm = context.getPackageManager();
+            for (String pkg : IntegritySpoofKeys.effectiveTargetPackages(context)) {
+                final String p = pkg.trim();
+                if (p.isEmpty()) {
+                    continue;
+                }
+                if (pkgCsv.length() > 0) {
+                    pkgCsv.append(',');
+                }
+                pkgCsv.append(p);
+                try {
+                    uids.add(pm.getPackageUid(p, 0));
+                } catch (Exception e) {
+                    Log.w(TAG, "cannot resolve uid for " + p, e);
                 }
             }
         }
+        // Attestation half: the keystore2 forge target-uid file.
         final StringBuilder sb = new StringBuilder();
         for (int uid : uids) {
             sb.append(uid).append('\n');
         }
         writeAtomic(sb.toString());
+        // Boot-state half: the appcompat sysprop-override package list (ProcessList binds green
+        // verified-boot / locked-bootloader props for these packages). Cleared when disabled so
+        // BOTH halves of the spoof follow the master switch, not just the attestation half.
+        try {
+            DeviceConfig.setProperty(IntegritySpoofKeys.DEVICE_CONFIG_NAMESPACE_APP_COMPAT,
+                    IntegritySpoofKeys.DEVICE_CONFIG_SYSPROP_OVERRIDE_PKGS,
+                    enabled ? pkgCsv.toString() : "", false);
+        } catch (Exception e) {
+            Log.w(TAG, "update appcompat override pkg list failed", e);
+        }
     }
 
     private static void writeAtomic(String contents) {

@@ -43,9 +43,12 @@ public class IntegritySpoofTargetAppsPreferenceController extends BasePreference
 
     @Override
     public CharSequence getSummary() {
-        final String csv = Settings.Secure.getString(mContext.getContentResolver(),
-                IntegritySpoofKeys.SECURE_TARGET_PACKAGES);
-        final int count = countPackages(csv);
+        int count = 0;
+        for (String p : IntegritySpoofKeys.effectiveTargetPackages(mContext)) {
+            if (!p.trim().isEmpty()) {
+                count++;
+            }
+        }
         if (count == 0) {
             return mContext.getString(R.string.fundamental_integrity_target_apps_none);
         }
