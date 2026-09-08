@@ -296,6 +296,8 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             case "top_level_privacy": return R.drawable.ic_homepage_privacy;
             case "top_level_location": return R.drawable.ic_homepage_location;
             case "top_level_accounts": return R.drawable.ic_homepage_accounts;
+            case "top_level_accounts_and_backup":
+                return R.drawable.ic_homepage_accounts_and_backup;
             case "top_level_supervision": return R.drawable.ic_homepage_supervision;
             case "top_level_emergency": return R.drawable.ic_homepage_emergency;
             case "top_level_accessibility": return R.drawable.ic_homepage_accessibility;
